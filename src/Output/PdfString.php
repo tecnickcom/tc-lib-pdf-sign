@@ -38,6 +38,8 @@ use Com\Tecnick\Pdf\Sign\Exception;
 final class PdfString
 {
     /**
+     * Encode a text value as a PDF string token.
+     *
      * @param callable|null $encoder fn(string $text, int $objectId): string
      *
      * @throws Exception If the encoder returns a non-string value.
