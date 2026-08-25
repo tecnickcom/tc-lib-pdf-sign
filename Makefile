@@ -215,9 +215,15 @@ lint:
 	./vendor/bin/mago --config ./mago.src.toml lint src
 	./vendor/bin/mago --config ./mago.test.toml lint test
 
+## Validate the composer manifest and check dependencies for advisories
+.PHONY: check-deps
+check-deps:
+	$(COMPOSER) validate --strict
+	$(COMPOSER) audit
+
 ## Run all tests and reports
 .PHONY: qa
-qa: ensuretarget lint test report
+qa: ensuretarget check-deps lint test report
 
 ## Generate various reports
 .PHONY: report
@@ -258,8 +264,7 @@ tag:
 .PHONY: test
 test: ensuretarget
 	cp phpunit.xml.dist phpunit.xml
-	#./vendor/bin/phpunit --migrate-configuration || true
-	OPENSSL_CONF=${OPENSSL_CONF} XDEBUG_MODE=coverage ./vendor/bin/phpunit --stderr test
+	OPENSSL_CONF=${OPENSSL_CONF} ./vendor/bin/phpunit --stderr test
 
 ## Remove all installed files
 .PHONY: uninstall

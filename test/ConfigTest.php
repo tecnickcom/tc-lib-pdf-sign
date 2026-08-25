@@ -20,6 +20,7 @@ namespace Test;
 
 use Com\Tecnick\Pdf\Sign\Config;
 use Com\Tecnick\Pdf\Sign\Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,7 +34,8 @@ use PHPUnit\Framework\TestCase;
  * @license   https://www.gnu.org/copyleft/lesser.html GNU-LGPL v3 (see LICENSE)
  * @link      https://github.com/tecnickcom/tc-lib-pdf-sign
  */
-class ConfigTest extends TestCase
+#[CoversClass(Config::class)]
+final class ConfigTest extends TestCase
 {
     public function testDefaultsAreLegacy(): void
     {

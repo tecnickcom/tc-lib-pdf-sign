@@ -7,7 +7,7 @@
 Name:      %{_package}
 Version:   %{_version}
 Release:   %{_release}%{?dist}
-Summary:   PHP library to sign data for PDF
+Summary:   PHP library to create and embed digital signatures in PDF documents
 
 License:   LGPLv3+
 URL:       https://github.com/%{gh_owner}/%{gh_project}
@@ -24,7 +24,8 @@ Provides:  php-composer(%{c_vendor}/%{gh_project}) = %{version}
 Provides:  php-%{gh_project} = %{version}
 
 %description
-PHP library to sign data for PDF
+PHP library to create and embed digital signatures (PKCS#7, CAdES, PAdES)
+in PDF documents.
 
 %build
 #(cd %{_current_directory} && make build)

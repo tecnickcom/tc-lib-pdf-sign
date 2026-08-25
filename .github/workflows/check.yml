@@ -58,5 +58,6 @@ jobs:
             - name: Send coverage
               uses: codecov/codecov-action@v7
               with:
+                files: target/coverage/coverage.xml
                 flags: php-${{ matrix.php-version }}-${{ matrix.os }}
                 name: php-${{ matrix.php-version }}-${{ matrix.os }}

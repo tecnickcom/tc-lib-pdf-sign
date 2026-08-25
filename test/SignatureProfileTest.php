@@ -21,6 +21,7 @@ namespace Test;
 use Com\Tecnick\Pdf\Sign\Config;
 use Com\Tecnick\Pdf\Sign\Exception;
 use Com\Tecnick\Pdf\Sign\SignatureProfile;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -34,7 +35,8 @@ use PHPUnit\Framework\TestCase;
  * @license   https://www.gnu.org/copyleft/lesser.html GNU-LGPL v3 (see LICENSE)
  * @link      https://github.com/tecnickcom/tc-lib-pdf-sign
  */
-class SignatureProfileTest extends TestCase
+#[CoversClass(SignatureProfile::class)]
+final class SignatureProfileTest extends TestCase
 {
     public function testCaseBackingValuesMatchConfigConstants(): void
     {
@@ -80,5 +82,28 @@ class SignatureProfileTest extends TestCase
     {
         $cfg = Config::fromArray(['profile' => SignatureProfile::PadesBB]);
         $this->assertSame(Config::PROFILE_PADES_B_B, $cfg->profile);
+    }
+
+    public function testConfigConstantStaysEqualToTheEnum(): void
+    {
+        // As for DigestAlgorithm, the derived list is kept in step by hand.
+        $this->assertSame(SignatureProfile::values(), Config::PROFILES);
+    }
+
+    public function testValuesMatchCases(): void
+    {
+        $values = \array_map(static fn(SignatureProfile $case): string => $case->value, SignatureProfile::cases());
+        $this->assertSame($values, SignatureProfile::values());
+        $this->assertSame(
+            ['legacy', 'pades-b-b', 'pades-b-t', 'pades-b-lt', 'pades-b-lta'],
+            SignatureProfile::values(),
+        );
+    }
+
+    public function testConfigAcceptsEveryCase(): void
+    {
+        foreach (SignatureProfile::cases() as $case) {
+            $this->assertSame($case->value, (new Config($case))->profile);
+        }
     }
 }

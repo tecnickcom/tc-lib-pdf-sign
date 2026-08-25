@@ -67,15 +67,15 @@ This runs linting, static analysis, and the full unit-test suite with coverage.
 
 Before opening an issue:
 
-1. **Check the [Security Policy](SECURITY.md)** — if the bug is a security vulnerability, do not file a public issue.
+1. **Check the [Security Policy](SECURITY.md)**: if the bug is a security vulnerability, do not file a public issue.
 2. **Search [existing issues](https://github.com/tecnickcom/tc-lib-pdf-sign/issues)** to avoid duplicates.
 
 If no existing issue matches, [open a new one](https://github.com/tecnickcom/tc-lib-pdf-sign/issues/new) and include:
 
 - A **clear title and description** of the problem.
 - The **library version** (`composer show tecnickcom/tc-lib-pdf-sign`) and PHP version.
-- A **minimal, self-contained reproduction** — a short PHP script or a failing PHPUnit test case is ideal.
-- **Expected vs. actual behaviour** — what you expected to happen and what actually happened.
+- A **minimal, self-contained reproduction**: a short PHP script or a failing PHPUnit test case.
+- **Expected vs. actual behaviour**: what you expected to happen and what actually happened.
 - Any relevant **stack trace or error output**.
 
 The more precise and reproducible the report, the faster it can be triaged and fixed.
@@ -108,7 +108,7 @@ Before writing any code:
 1. **Open a Feature Request** on [GitHub Issues](https://github.com/tecnickcom/tc-lib-pdf-sign/issues/new) describing the use case and proposed API.
 2. Wait for feedback from the maintainer. This avoids investing time in a direction that may not be accepted.
 
-Once the feature is agreed upon, follow the same branch → code → test → PR workflow as for bug fixes, using a branch named `feature/short-description`.
+Once the feature is agreed upon, follow the same branch, code, test, and PR workflow as for bug fixes, using a branch named `feature/short-description`.
 
 ---
 
@@ -149,7 +149,7 @@ Tests are written with [PHPUnit](https://phpunit.de/) and live in `test/`.
 make test
 
 # Run a specific test file
-XDEBUG_MODE=coverage ./vendor/bin/phpunit test/HTMLTest.php
+XDEBUG_MODE=coverage ./vendor/bin/phpunit test/SignerTest.php
 ```
 
 Requirements for contributions:
@@ -164,7 +164,7 @@ Coverage reports are generated in `target/coverage/`.
 ## Pull Request Guidelines
 
 - Target the `main` branch.
-- Keep PRs focused — one fix or feature per PR.
+- Keep PRs focused: one fix or feature per PR.
 - Ensure `make qa` passes locally before opening the PR.
 - Do not bump the version number in your PR; that is handled by the maintainer at release time.
 - Be responsive to review feedback; stale PRs may be closed after an extended period of inactivity.
@@ -176,11 +176,11 @@ Coverage reports are generated in `target/coverage/`.
 Use concise, imperative-mood commit messages:
 
 ```
-fix: correct path traversal in font loader
+fix: reject a non-minimal ASN.1 integer
 feat: add support for XYZ
 test: add regression test for #123
 docs: update CONTRIBUTING workflow
-refactor: extract text measurement into helper
+refactor: extract the CertID comparison into a helper
 ```
 
 Prefix tags: `fix`, `feat`, `test`, `docs`, `refactor`, `chore`, `ci`.  
