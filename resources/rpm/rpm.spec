@@ -41,5 +41,7 @@ rm -rf "%{buildroot}"
 # Optional config files can be listed here when used by a project.
 
 %changelog
+* %{_builddate} Nicola Asuni <info@tecnick.com> %{version}-%{release}
+- Refer to the project git history for the contents of this release.
 * Wed Sep 23 2026 Nicola Asuni <info@tecnick.com> 1.0.0-1
 - Initial Commit
