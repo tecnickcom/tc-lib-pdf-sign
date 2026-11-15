@@ -398,11 +398,11 @@ final class ValidationMaterialTest extends TestCase
     {
         // Typed loosely on purpose: an entry that is not a string would reach
         // pemToDer() as a TypeError rather than an Exception.
-        /** @var list<string> $certs */
         $certs = [$this->caPem, 42];
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessageMatches('/Invalid certificate 1/');
+        // @mago-expect analysis:invalid-argument
         $this->material->certificates($certs);
     }
 
@@ -411,14 +411,15 @@ final class ValidationMaterialTest extends TestCase
         // The same rule for the three entry points that take a URL list. On the
         // fetch routes the catch that turns a failure into a skip would swallow the
         // closure's own TypeError, and skip() would then raise a second one.
-        /** @var list<string> $urls */
         $urls = [7];
         $material = $this->material;
         $caDer = $this->caDer;
         $leafDer = $this->leafDer;
 
         $calls = [
+            // @mago-expect analysis:invalid-argument
             'ocsp' => static fn(): array => $material->fetchOcsp($caDer, $leafDer, $urls, static fn(): string => ''),
+            // @mago-expect analysis:invalid-argument
             'crl' => static fn(): array => $material->fetchCrl($urls, static fn(): string => '', $caDer, $leafDer),
         ];
 
@@ -433,6 +434,7 @@ final class ValidationMaterialTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessageMatches('/Invalid crl URL 0/');
+        // @mago-expect analysis:invalid-argument
         $this->material->reportNotAttempted('crl', $urls, 'not attempted', null);
     }
 

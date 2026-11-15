@@ -253,8 +253,9 @@ final class Authority
             throw new RuntimeException('Unable to load the fixture key: ' . $name);
         }
 
-        self::$cache[$name] = new self($certPem, Certificate::pemToDer($certPem), $key);
+        $authority = new self($certPem, Certificate::pemToDer($certPem), $key);
+        self::$cache[$name] = $authority;
 
-        return self::$cache[$name];
+        return $authority;
     }
 }

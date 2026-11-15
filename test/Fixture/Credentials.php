@@ -66,9 +66,10 @@ final class Credentials
             return self::$cache[$cacheKey];
         }
 
-        self::$cache[$cacheKey] = self::generate($keyType, $curve, $commonName);
+        $credential = self::generate($keyType, $curve, $commonName);
+        self::$cache[$cacheKey] = $credential;
 
-        return self::$cache[$cacheKey];
+        return $credential;
     }
 
     /**

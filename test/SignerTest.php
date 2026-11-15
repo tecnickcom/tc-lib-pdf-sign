@@ -1009,11 +1009,11 @@ final class SignerTest extends TestCase
     {
         // Typed loosely on purpose: a member that is not a string would reach
         // Certificate::toDer() as a TypeError rather than an Exception.
-        /** @var list<string> $chain */
         $chain = [42];
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessageMatches('/Invalid chain certificate 0/');
+        // @mago-expect analysis:invalid-argument
         (new Signer())->collectValidationMaterial($chain);
     }
 
@@ -1025,11 +1025,11 @@ final class SignerTest extends TestCase
         $ltvPem = (string) \file_get_contents(__DIR__ . '/data/ltv_cert.pem');
         $caPem = (string) \file_get_contents(__DIR__ . '/data/ltv_ca.pem');
 
-        /** @var list<string> $tokens */
         $tokens = [42];
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessageMatches('/Invalid timestamp token 0/');
+        // @mago-expect analysis:invalid-argument
         (new Signer())->collectValidationMaterial([$ltvPem, $caPem], null, null, $tokens);
     }
 

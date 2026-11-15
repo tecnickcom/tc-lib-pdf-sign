@@ -1057,11 +1057,11 @@ final class BuilderTest extends TestCase
 
         // Typed loosely on purpose: an entry that is not a string would reach
         // Certificate::toDer() as a TypeError rather than an Exception.
-        /** @var list<string> $chain */
         $chain = [42];
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessageMatches('/Invalid chain certificate 0/');
+        // @mago-expect analysis:invalid-argument
         $builder->buildFromSignature($request, $signature, $chain);
     }
 

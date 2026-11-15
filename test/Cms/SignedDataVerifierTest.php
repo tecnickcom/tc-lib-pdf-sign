@@ -674,7 +674,9 @@ final class SignedDataVerifierTest extends TestCase
                 'Invalid signing-certificate',
             ],
             'certHash not an octet string' => [
-                static fn(Asn1 $asn1): string => $asn1->encodeSequence($asn1->encodeSequence($asn1->encodeSequence($asn1->encodeInteger(
+                static fn(
+                    Asn1 $asn1,
+                ): string => $asn1->encodeSequence($asn1->encodeSequence($asn1->encodeSequence($asn1->encodeInteger(
                     1,
                 )))),
                 'Invalid signing-certificate',
